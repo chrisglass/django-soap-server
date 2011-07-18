@@ -13,10 +13,11 @@ class DjangoSoapApp(Application):
     def __call__(self, request):
         django_response = HttpResponse() # This is the actual return value
         
-        # Enforce HTTPS
-        if not request.is_secure() and not settings.DEBUG: # pragma: nocover 
-            django_response.status_code = 400 # Bad request - we need https
-            return django_response
+        # Enforce HTTPS if required
+        if getattr(settings, 'SOAP_SERVER_HTTPS', True): #pragma: nocover
+            if not request.is_secure() and not settings.DEBUG: 
+                django_response.status_code = 400 # Bad request - we need https
+                return django_response
         
         # Enforce basic auth
         if not 'HTTP_AUTHORIZATION' in request.META:
