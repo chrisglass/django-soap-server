@@ -20,8 +20,9 @@ class DjangoSoapApp(Application):
         
         # Enforce basic auth
         if not 'HTTP_AUTHORIZATION' in request.META:
+            realm = getattr(settings, 'SOAP_SERVER_REALM', 'Webservice')
             django_response.status_code = 401 # Request auth
-            django_response['WWW-Authenticate'] = 'Basic realm="Webservice"'
+            django_response['WWW-Authenticate'] = 'Basic realm="%s"' % realm
             return django_response
         
         # The start_response method we'll pass to WSGI
