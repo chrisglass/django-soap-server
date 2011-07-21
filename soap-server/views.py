@@ -12,7 +12,4 @@ This is absolutely necessary since it would otherwise diverge from the RFC and
 thus would require custom webservice clients. 
 '''
 
-webservice = csrf_exempt(DjangoSoapApp([ # A list of services to expose
-                                                 # The are *not* namespaced!
-                                                 WebService,
-                                                 ], 'ws', name='ws'))
+webservice = csrf_exempt(Application([WebService], 'ws', name='ws'))

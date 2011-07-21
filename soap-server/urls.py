@@ -4,6 +4,6 @@ from views import webservice
 
 
 urlpatterns = patterns('',
-    url(r'^service.wsdl$', webservice ), # This is the WSDL
+    # That's it. Call this url with "?wsdl" to get the wsdl file
     url(r'^.*', webservice), # IMPORTANT: do not end regexp with '$' !
 )
