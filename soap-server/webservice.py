@@ -13,6 +13,6 @@ class WebService(DefinitionBase):
         self.environ = environ
         super(WebService, self).__init__(environ)
 
-    @soapString, _returns=String)# Soap is typed - we need stuff like this
+    @soap(String, _returns=String)# Soap is typed - we need stuff like this
     def hello_soap_world(self, name):
         return "Hello, %s!" % name
