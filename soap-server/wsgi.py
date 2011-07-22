@@ -114,7 +114,7 @@ def embed_wsgi(application):
         
         # Enforce basic auth
         if hasattr(settings, 'SOAP_SERVER_BASICAUTH_REALM'):
-            if not 'HTTP_AUTHORIZATION' in request.META:
+            if not 'HTTP_AUTHORIZATION' in request.environ:
                 realm = getattr(settings, 'SOAP_SERVER_BASICAUTH_REALM', 'Webservice')
                 response.status_code = 401 # Request auth
                 response['WWW-Authenticate'] = 'Basic realm="%s"' % realm
@@ -126,8 +126,8 @@ def embed_wsgi(application):
         if len(args) > 0:
             shift_path(environ, '/' + args[0])
         # Django converts SCRIPT_NAME and PATH_INFO to unicode in WSGIRequest.
-        environ['SCRIPT_NAME'] = environ['SCRIPT_NAME'].encode('iso-8859-1')
-        environ['PATH_INFO'] = environ['PATH_INFO'].encode('iso-8859-1')
+        environ['SCRIPT_NAME'] = environ.get('SCRIPT_NAME', '').encode('iso-8859-1')
+        environ['PATH_INFO'] = environ.get('PATH_INFO', '').encode('iso-8859-1')
 
         headers_set = []
         headers_sent = []
