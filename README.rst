@@ -1,6 +1,12 @@
 Django SOAP server
 ###################
 
+THIS PROJECT IS UNMAINTAINED
+=============================
+
+This project bitrotted for some years without anyone looking at it. Please get in
+touch by @'ing or email should you want to take over maintenance/development.
+
 
 The goal of this projecct is to provide an example of best practices on how to
 write a SOAP 1.1 compliant server using Django.
